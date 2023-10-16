@@ -191,19 +191,36 @@
         function getCredit() {
             axios.get('/credit')
             .then(function (res) {
-                console.log(res);
-                console.log(Object.keys(res).length)
-                var arrayLength = Object.keys(res).length
-                for (var i=0; i<=arrayLength; i++){
-                    var title = array.data[i].title;
-                    var value = array.data[i].value;
-                    var color = array.data[i].color;
+                var arrayLength = Object.keys(res.data).length
+                console.log("Hi");
+                console.log(arrayLength)
+                console.log(res.data);
+                console.log("before loop")
+                for (var i=0; i<arrayLength; i++){
+                    console.log("in loop")
+                    var title = res.data[i].title;
+                    var value = res.data[i].value;
+                    var color = res.data[i].color;
                     console.log( title + " " + value + " " + color);
 
-                    chartTwo.datasets[0].data[i] = res.data.myCredit[i].value;
-                    chartTwo.datasets[1].data[i] = res.data.myCredit[i].color;
-                    chartTwo.labels[i] = res.data.myCredit[i].title;
+                    chartTwo.datasets[0].data[i] = value;
+                    chartTwo.datasets[0].backgroundColor[i] = color;
+                    chartTwo.labels[i] = title;
                 }
+                console.log("after loop")
+                // console.log(res);
+                // console.log(Object.keys(res).length)
+                // var arrayLength = Object.keys(res).length
+                // for (var i=0; i<=arrayLength; i++){
+                //     var title = array.data[i].title;
+                //     var value = array.data[i].value;
+                //     var color = array.data[i].color;
+                //     console.log( title + " " + value + " " + color);
+
+                //     chartTwo.datasets[0].data[i] = res.data.myCredit[i].value;
+                //     chartTwo.datasets[1].data[i] = res.data.myCredit[i].color;
+                //     chartTwo.labels[i] = res.data.myCredit[i].title;
+                // }
                 // for (var i=0; i < res.data.assignment_collection.length; i++) {
                 //     chartTwo.datasets[0].data[i] = res.data.myCredit[i].budget;
                 //     chartTwo.labels[i] = res.data.myCredit[i].title;
