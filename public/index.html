@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="main.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.3/chart.min.js" integrity="sha512-fMPPLjF/Xr7Ga0679WgtqoSyfUoQgdt8IIxJymStR5zV3Fyb6B3u/8DcaZ6R6sXexk5Z64bCgo2TYyn760EdcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.3/chart.min.js" integrity="sha512-fMPPLjF/Xr7Ga0679WgtqoSyfUoQgdt8IIxJymStR5zV3Fyb6B3u/8DcaZ6R6sXexk5Z64bCgo2TYyn760EdcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
 </head>
@@ -174,16 +174,7 @@
             datasets: [
                 {
                     data: [],
-                    backgroundColor: [
-                        '#ffcd56',
-                        '#ff6384',
-                        '#36a2eb',
-                        '#fd6b19',
-                        '#AEE5D8',
-                        'pink',
-                        '#386641',
-                        '#361134'
-                    ],
+                    backgroundColor: [],
                 }
             ],
             labels: []
@@ -201,13 +192,25 @@
             axios.get('/credit')
             .then(function (res) {
                 console.log(res);
-                for (var i=0; i < res.data.myCredit.length; i++) {
-                    chartTwo.datasets[0].data[i] = res.data.myCredit[i].budget;
+                console.log(Object.keys(res).length)
+                var arrayLength = Object.keys(res).length
+                for (var i=0; i<=arrayLength; i++){
+                    var title = array.data[i].title;
+                    var value = array.data[i].value;
+                    var color = array.data[i].color;
+                    console.log( title + " " + value + " " + color);
+
+                    chartTwo.datasets[0].data[i] = res.data.myCredit[i].value;
+                    chartTwo.datasets[1].data[i] = res.data.myCredit[i].color;
                     chartTwo.labels[i] = res.data.myCredit[i].title;
                 }
+                // for (var i=0; i < res.data.assignment_collection.length; i++) {
+                //     chartTwo.datasets[0].data[i] = res.data.myCredit[i].budget;
+                //     chartTwo.labels[i] = res.data.myCredit[i].title;
+                // }
                 createChartTwo();
             });
-        }
+        }     
         getCredit();
     </script>
 
