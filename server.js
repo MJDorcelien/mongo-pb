@@ -32,6 +32,24 @@ app.get('/budget', (req, res) => {
         });
 });
 
+app.get('/updatebudget', (req, res) => {
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
+        .then(() => {
+            let newData = new budgetModel({title: "Books", value: 100, color: "#ffcd56"})
+            budgetModel.insertMany(newData).exec().then(data => {
+                console.log("Connected to the database")
+                console.log(data)
+                res.json(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        })
+        .catch(connectionError => {
+            console.log(connectionError)
+        })
+})
+
 app.get('/credit', (req, res) => {
     mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
         .then(() => {
@@ -48,6 +66,24 @@ app.get('/credit', (req, res) => {
             console.log(connectionError);
         });
 });
+
+app.get('/creditupdate', (req, res) => {
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
+        .then(() => {
+            let newData = new budgetModel({title: "American Express", value: 100, color: "#fd6b19"})
+            creditModel.insertMany(newData).exec().then(data => {
+                console.log("Connected to the database")
+                console.log(data)
+                res.json(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        })
+        .catch(connectionError => {
+            console.log(connectionError)
+        })
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
