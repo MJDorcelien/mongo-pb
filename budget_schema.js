@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const chartSchema = new mongoose.Schema({
+const budgetSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -16,6 +16,6 @@ const chartSchema = new mongoose.Schema({
         require: true,
         unique: true
     }
-}, { collection: 'mongodb_collection'})
+}, { collection: 'assignment_budget'})
 
-module.exports = mongoose.model('mongodb_collection', chartSchema)
+module.exports = mongoose.model('assignment_budget', budgetSchema)
